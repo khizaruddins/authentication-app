@@ -1,0 +1,32 @@
+<div class="input-wrapper">
+    @if (config.label) {
+        <div class="label">
+            {{config.label}}
+        </div>
+    }
+    <input [type]="config.type" [placeholder]="config.placeholder">
+    @if (control.touched && control.hasError('required')) {
+        <div class="error">
+            {{config.errorMessage.required}}
+        </div>
+    }
+
+    @if (control.touched && control.hasError('minlength')) {
+        <div class="error">
+            {{config.errorMessage.minlength}}
+        </div>
+    }
+
+    @if (control.touched && control.hasError('maxlength')) {
+        <div class="error">
+            {{config.errorMessage.maxlength}}
+        </div>
+    }
+
+
+    @if (control.touched && control.hasError('pattern')) {
+        <div class="error">
+            {{config.errorMessage.pattern}}
+        </div>
+    }
+</div>

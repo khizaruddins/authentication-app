@@ -1,0 +1,12 @@
+.login-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    .image-wrapper {
+        img {
+            width: auto;
+            max-height: fit-content;
+            object-fit: cover;
+        }
+    }
+}

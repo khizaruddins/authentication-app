@@ -1,0 +1,9 @@
+<div class="login-wrapper">
+    <div class="image-wrapper">
+        <img src="https://images.pexels.com/photos/2402995/pexels-photo-2402995.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="some of the beautiful image">
+    </div>
+    <form (ngSubmit)="onLoginSubmit()">
+        <app-input [config]="loginFormInfo.email" [control]="emailCtrl"></app-input>
+        <app-input [config]="loginFormInfo.password" [control]="passwordCtrl"></app-input>
+    </form>
+</div>
