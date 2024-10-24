@@ -1,11 +1,5 @@
 <div class="login-wrapper">
-    <div class="image-wrapper">
-        <div class="content">
-            <div class="title">
-                Welcome
-            </div>
-        </div>
-    </div>
+    <div class="image-wrapper"></div>
     <div class="content-wrapper">
         <div class="content">
             <div class="text-5xl text-blue-900 mb-2 font-light">
@@ -19,8 +13,8 @@
             </div>
         </div>
         <form (ngSubmit)="onLoginSubmit()">
-            <app-input [config]="loginFormInfo.email" [control]="emailCtrl"></app-input>
-            <app-input [config]="loginFormInfo.password" [control]="passwordCtrl"></app-input>
+            <app-input [config]="loginFormInfo.email" [control]="emailCtrl" />
+            <app-input [config]="loginFormInfo.password" [control]="passwordCtrl" />
         </form>
     </div>
 </div>
