@@ -1,9 +1,26 @@
 <div class="login-wrapper">
     <div class="image-wrapper">
-        <img src="https://images.pexels.com/photos/2402995/pexels-photo-2402995.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="some of the beautiful image">
+        <div class="content">
+            <div class="title">
+                Welcome
+            </div>
+        </div>
     </div>
-    <form (ngSubmit)="onLoginSubmit()">
-        <app-input [config]="loginFormInfo.email" [control]="emailCtrl"></app-input>
-        <app-input [config]="loginFormInfo.password" [control]="passwordCtrl"></app-input>
-    </form>
+    <div class="content-wrapper">
+        <div class="content">
+            <div class="text-5xl text-blue-900 mb-2 font-light">
+                Welcome
+            </div>
+            <div class="text-3xl text-blue-600 mb-2 font-thin">
+                Sign in to your account
+            </div>
+            <div class="text-xs text-gray-400">
+                Not a member? Start a 14 day free trial
+            </div>
+        </div>
+        <form (ngSubmit)="onLoginSubmit()">
+            <app-input [config]="loginFormInfo.email" [control]="emailCtrl"></app-input>
+            <app-input [config]="loginFormInfo.password" [control]="passwordCtrl"></app-input>
+        </form>
+    </div>
 </div>

@@ -23,6 +23,7 @@ export class LoginPageComponent {
 
   loginFormInfo = {
     email: {
+      label: 'Enter your Email ID',
       type: 'text',
       placeholder: 'Eg: abc@gmail.com',
       errorMessage: {
@@ -31,6 +32,7 @@ export class LoginPageComponent {
       },
     },
     password: {
+      label: 'Enter your Password',
       placeholder: '',
       type: 'password',
       errorMessage: {

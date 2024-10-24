@@ -2,11 +2,18 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
+    height: 100vh;
     .image-wrapper {
-        img {
-            width: auto;
-            max-height: fit-content;
-            object-fit: cover;
+        background-image: url('https://images.pexels.com/photos/6678111/pexels-photo-6678111.jpeg');
+        background-size: cover;
+        height: 100%;
+        width: 95%;
+        background-repeat: no-repeat;
+        position: relative;
+    }
+    .content {
+        form {
+            margin-top: 20px;
         }
     }
 }
