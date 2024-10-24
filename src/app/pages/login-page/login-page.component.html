@@ -15,7 +15,7 @@
         <form (ngSubmit)="onLoginSubmit()" class="mt-4" [formGroup]="loginForm">
             <app-input [config]="loginFormInfo.email" appearance="outline" [control]="getControlFromGroup('email')" />
             <app-input [config]="loginFormInfo.password" appearance="outline" [control]="getControlFromGroup('password')" />
-            <div class="mt-0">
+            <div class="mt-3">
                 <mat-checkbox [checked]="getControlFromGroup('remember').value" formControlName="remember">Remember me</mat-checkbox>
             </div>
             <div class="mt-4 w-40">

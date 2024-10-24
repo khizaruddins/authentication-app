@@ -9,6 +9,12 @@
         @if (config.type === 'password') {
             <mat-icon matSuffix class="cursor-pointer" #passwordIconRef (click)="showHidePassword()">{{show? 'visibility':'visibility_off'}}</mat-icon>
         }
+
+        @if (config.hint) {
+            <mat-hint class="flex gap-1 align-center">
+                <span class="text-xs">{{config.hint}}</span>
+            </mat-hint>
+        }
         @if (control.touched && control.hasError('required')) {
             <mat-error>
                 {{config.errorMessage.required}}

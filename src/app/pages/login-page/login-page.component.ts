@@ -4,7 +4,7 @@ import { InputComponent } from "../../core/input/input.component";
 import { LOGIN_FORM_INFO } from '../../shared/form-infos/login-form.info';
 import { RouterLink } from '@angular/router';
 import { ButtonComponent } from "../../core/button/button.component";
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @Component({
@@ -28,7 +28,11 @@ export class LoginPageComponent {
       validators: [Validators.required, Validators.email]
     }),
     password: new FormControl('', {
-      validators: [Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)]
+      validators: [
+        Validators.required, 
+        Validators.minLength(8), 
+        Validators.maxLength(20), 
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$/)]
     }),
     remember: new FormControl(false, {
       validators: [Validators.required]
@@ -38,7 +42,8 @@ export class LoginPageComponent {
   loginFormInfo = LOGIN_FORM_INFO;
   submitBtnInfo = {
     type: 'submit',
-    label: 'Login'
+    label: 'Login',
+    isLoading: false
   }
   
   onLoginSubmit() {

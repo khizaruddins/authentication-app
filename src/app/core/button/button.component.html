@@ -1,5 +1,15 @@
 <div class="flex align-center w-full">
-    <button mat-stroked-button [type]="config.type" (click)="onBtnClick($event)" class="w-full">
-        {{config.label}}
+    <button mat-stroked-button [disabled]="config.isLoading" [type]="config.type" (click)="onBtnClick($event)" class="w-full">
+        @if (!config.isLoading) {
+            {{config.label}}
+        }
+        @if (config.isLoading) {
+            <div class="flex align-center justify-between gap-1" >
+                <mat-spinner [diameter]="16"></mat-spinner>
+                <span class="text-sm">
+                    Please wait...
+                </span>
+            </div>
+        }
     </button>
 </div>

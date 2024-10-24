@@ -13,11 +13,12 @@ export const LOGIN_FORM_INFO = {
       placeholder: 'Eg. ********',
       type: 'password',
       appearance: 'outline',
+      hint: 'Password must contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number',
       errorMessage: {
         required: 'This field is required',
         minlength: 'Minimum 8 characters required',
         maxlength: 'Maximum 20 characters allowed',
-        pattern: 'Password must contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number'
+        pattern: 'Password is Invalid',
       }
     }
   }
