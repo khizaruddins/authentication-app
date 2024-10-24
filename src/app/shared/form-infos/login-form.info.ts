@@ -10,8 +10,9 @@ export const LOGIN_FORM_INFO = {
     },
     password: {
       label: 'Enter your Password',
-      placeholder: '',
+      placeholder: 'Eg. ********',
       type: 'password',
+      appearance: 'outline',
       errorMessage: {
         required: 'This field is required',
         minlength: 'Minimum 8 characters required',

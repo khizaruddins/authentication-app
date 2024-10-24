@@ -1,32 +1,37 @@
 <div class="input-wrapper">
-    @if (config.label) {
-        <div class="label">
-            {{config.label}}
-        </div>
-    }
-    <input [type]="config.type" [placeholder]="config.placeholder">
-    @if (control.touched && control.hasError('required')) {
-        <div class="error">
-            {{config.errorMessage.required}}
-        </div>
-    }
+    <mat-form-field appearance="outline">
+        @if (config.label) {
+            <mat-label >
+                {{config.label}}
+            </mat-label> 
+        }
+        <input #inputRef [type]="config.type" matInput [placeholder]="config.placeholder" [formControl]="control"/>
+        @if (config.type === 'password') {
+            <mat-icon matSuffix class="cursor-pointer" #passwordIconRef (click)="showHidePassword()">{{show? 'visibility':'visibility_off'}}</mat-icon>
+        }
+        @if (control.touched && control.hasError('required')) {
+            <mat-error>
+                {{config.errorMessage.required}}
+            </mat-error>
+        }
 
-    @if (control.touched && control.hasError('minlength')) {
-        <div class="error">
-            {{config.errorMessage.minlength}}
-        </div>
-    }
+        @if (control.touched && control.hasError('minlength')) {
+            <mat-error>
+                {{config.errorMessage.minlength}}
+            </mat-error>
+        }
 
-    @if (control.touched && control.hasError('maxlength')) {
-        <div class="error">
-            {{config.errorMessage.maxlength}}
-        </div>
-    }
+        @if (control.touched && control.hasError('maxlength')) {
+            <mat-error>
+                {{config.errorMessage.maxlength}}
+            </mat-error>
+        }
 
 
-    @if (control.touched && control.hasError('pattern')) {
-        <div class="error">
-            {{config.errorMessage.pattern}}
-        </div>
-    }
+        @if (control.touched && control.hasError('pattern')) {
+            <mat-error>
+                {{config.errorMessage.pattern}}
+            </mat-error>
+        }
+    </mat-form-field>
 </div>
