@@ -1,1 +1,45 @@
-<p>register-page works!</p>
+<div class="flex lg:grid lg:grid-cols-2 items-center w-screen h-screen register-page">
+    <div class="m-20">
+        <div class="text-5xl font-thin text-gray-600">
+            Welcome
+        </div>
+        <div class="text-2xl mt-2 font-thin text-red-900">
+            Create your free account
+        </div>
+        <div class="text-sm font-thin mt-2">
+            Already have an account? <span class="text-sm font-medium cursor-pointer text-slate-600" routerLink="/"> Login here</span>.
+        </div>
+        <form (ngSubmit)="onRegister()" [formGroup]="signupForm" class="mt-3">
+            <div class="flex w-full gap-3">
+                <div class="w-1/2">
+                    <app-input [config]="sigupFormInfo.firstName" appearance="outline" [control]="getFormControl('firstName')"></app-input>
+                </div>
+                <div class="w-1/2">
+                    <app-input [config]="sigupFormInfo.lastName" appearance="outline" [control]="getFormControl('lastName')"></app-input>
+                </div>
+            </div>
+            <div class="flex flex-col w-full">
+                <app-input [config]="sigupFormInfo.email" appearance="outline" [control]="getFormControl('email')" />
+                <app-input [config]="sigupFormInfo.password" appearance="outline" [control]="getFormControl('passwords.password')" />
+                <app-input [config]="sigupFormInfo.repass" appearance="outline" [control]="getFormControl('passwords.repass')" />
+                @if (getFormControl('passwords').hasError('notSame')) {
+                    <mat-error class="text-xs">
+                        Password not same
+                    </mat-error>
+                }
+            </div>
+            <div class="mt-0">
+                <mat-checkbox [checked]="getFormControl('terms').value" formControlName="terms"> <span class="text-xs text-gray-600 flex items-center">I agree to share my details for further enhance of web apps.</span></mat-checkbox>
+                @if (getFormControl('terms').touched && getFormControl('terms').hasError('required')) {
+                    <mat-error class="text-xs">
+                        This field is required
+                    </mat-error>
+                }
+            </div>
+            <div class="flex flex-col w-1/2 mt-4 h-14">
+                <app-button [config]="registerBtnInfo" [disabled]="signupForm.invalid" />
+            </div>
+        </form>
+    </div>
+    <div class="flex bg-no-repeat bg-cover h-full bg-center bg-[url('https://images.pexels.com/photos/19261088/pexels-photo-19261088/free-photo-of-mushrooms-growing-from-a-crack-in-a-tree-stump.jpeg')]"></div>
+</div>

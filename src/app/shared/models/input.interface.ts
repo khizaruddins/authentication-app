@@ -1,6 +1,6 @@
 
 export interface IInput {
-    label?: string;
+    label: string;
     type: string;
     placeholder: string;
     hint?: string;

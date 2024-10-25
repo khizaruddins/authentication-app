@@ -1,10 +1,7 @@
 .input-wrapper {
     margin-top: 4px;
    ::ng-deep mat-form-field {
-        width: 400px;
-        @media (max-width: 768px) {
-            width: 100%;
-        }
+        width: 100%;
         .mdc-text-field--filled:not(.mdc-text-field--disabled) {
             background-color: transparent !important;
         }

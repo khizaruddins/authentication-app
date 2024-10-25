@@ -23,6 +23,7 @@ export class InputComponent {
   @Input({required: true}) config!: IInput;
   @Input({required: true}) control!: FormControl;
   @Input({required: true}) appearance: MatFormFieldAppearance = 'outline';
+  @Input() formFieldClass: string = '';
   @ViewChild('passwordIconRef') passwordIconRef!: any;
   @ViewChild('inputRef') inputRef!: ElementRef<HTMLInputElement>;
   show = false;

@@ -1,5 +1,5 @@
-<div class="flex align-center w-full">
-    <button mat-stroked-button [disabled]="config.isLoading" [type]="config.type" (click)="onBtnClick($event)" class="w-full">
+<div class="flex align-center w-full h-full">
+    <button mat-stroked-button [disabled]="config.isLoading" [disabled]="disabled" [type]="config.type" (click)="onBtnClick($event)" class="w-full">
         @if (!config.isLoading) {
             {{config.label}}
         }

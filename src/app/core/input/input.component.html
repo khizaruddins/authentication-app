@@ -1,11 +1,11 @@
 <div class="input-wrapper">
-    <mat-form-field appearance="outline">
+    <mat-form-field [appearance]="appearance" [class]="formFieldClass">
         @if (config.label) {
             <mat-label >
                 {{config.label}}
             </mat-label> 
         }
-        <input #inputRef [type]="config.type" matInput [placeholder]="config.placeholder" [formControl]="control"/>
+        <input #inputRef [type]="config.type" matInput [name]="config.label" [placeholder]="config.placeholder" [formControl]="control"/>
         @if (config.type === 'password') {
             <mat-icon matSuffix class="cursor-pointer" #passwordIconRef (click)="showHidePassword()">{{show? 'visibility':'visibility_off'}}</mat-icon>
         }
@@ -29,9 +29,15 @@
         }
 
 
-        @if (control.touched && control.hasError('pattern')) {
+        @if (control.touched && control.hasError('pattern') && !control.hasError('minlength')) {
             <mat-error>
                 {{config.errorMessage.pattern}}
+            </mat-error>
+        }
+
+        @if (control.touched && control.hasError('email')) {
+            <mat-error>
+                {{config.errorMessage.email}}
             </mat-error>
         }
     </mat-form-field>

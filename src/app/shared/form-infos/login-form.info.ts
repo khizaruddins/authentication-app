@@ -3,9 +3,10 @@ export const LOGIN_FORM_INFO = {
       label: 'Enter your Email ID',
       type: 'text',
       placeholder: 'Eg: abc@gmail.com',
+      appearance: 'outline',
       errorMessage: {
         required: 'This field is required',
-        email: 'Email is invalid',
+        email: 'Invalid email',
       },
     },
     password: {
@@ -13,12 +14,11 @@ export const LOGIN_FORM_INFO = {
       placeholder: 'Eg. ********',
       type: 'password',
       appearance: 'outline',
-      hint: 'Password must contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number',
       errorMessage: {
         required: 'This field is required',
         minlength: 'Minimum 8 characters required',
         maxlength: 'Maximum 20 characters allowed',
-        pattern: 'Password is Invalid',
+        pattern: 'Invalid password',
       }
     }
   }
