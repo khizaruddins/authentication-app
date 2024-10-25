@@ -1,10 +1,13 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputComponent } from "../../core/input/input.component";
 import { LOGIN_FORM_INFO } from '../../shared/form-infos/login-form.info';
 import { RouterLink } from '@angular/router';
 import { ButtonComponent } from "../../core/button/button.component";
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { VarsService } from '../../shared/services/vars.service';
 
 
 @Component({
@@ -16,7 +19,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     InputComponent,
     RouterLink,
     ButtonComponent,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatIconModule,
+    MatTooltipModule
 ],
 changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './login-page.component.html',
@@ -39,16 +44,38 @@ export class LoginPageComponent {
     })
   });
 
+  varsService = inject(VarsService);
+
   loginFormInfo = LOGIN_FORM_INFO;
   submitBtnInfo = {
     type: 'submit',
     label: 'Login',
     isLoading: false
   }
+
+  ngOnInit() {
+    this.patchEmail();
+  }
+
+  patchEmail() {
+    if (this.varsService.isBrowser) {
+      const data = localStorage.getItem('loggedInEmail');
+      if (data) {
+        const userEmail = JSON.parse(data);
+        this.loginForm.patchValue({email: userEmail});
+      }
+    }
+  }
   
   onLoginSubmit() {
+    const values = {...this.loginForm.value}
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
+      if (this.loginForm.get('remember')?.value) {
+        delete values.remember;
+        localStorage.setItem('loggedInEmail', JSON.stringify(this.loginForm.value.email));
+      } else {
+        localStorage.clear();
+      }
     } else {
       this.loginForm.markAllAsTouched();
     }
