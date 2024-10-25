@@ -22,8 +22,8 @@ import { VarsService } from '../../shared/services/vars.service';
     MatCheckboxModule,
     MatIconModule,
     MatTooltipModule
-],
-changeDetection: ChangeDetectionStrategy.OnPush,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss'
 })
@@ -47,6 +47,7 @@ export class LoginPageComponent {
   varsService = inject(VarsService);
 
   loginFormInfo = LOGIN_FORM_INFO;
+  isMobile = false;
   submitBtnInfo = {
     type: 'submit',
     label: 'Login',
@@ -55,6 +56,7 @@ export class LoginPageComponent {
 
   ngOnInit() {
     this.patchEmail();
+    this.isMobile = this.varsService.isMobile;
   }
 
   patchEmail() {
