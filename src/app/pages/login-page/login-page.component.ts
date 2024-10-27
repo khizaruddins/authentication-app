@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputComponent } from "../../core/input/input.component";
 import { LOGIN_FORM_INFO } from '../../shared/form-infos/login-form.info';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ButtonComponent } from "../../core/button/button.component";
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,6 +10,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { VarsService } from '../../shared/services/vars.service';
 import { ApiService } from '../../shared/services/api.service';
 import { API_URLS } from '../../shared/constants/api-urls';
+import { UtilService } from '../../shared/services/util.service';
 
 
 @Component({
@@ -46,9 +47,11 @@ export class LoginPageComponent {
       validators: [Validators.required]
     })
   });
+  util = inject(UtilService);
 
   varsService = inject(VarsService);
   apiService = inject(ApiService);
+  router = inject(Router);
 
   loginFormInfo = LOGIN_FORM_INFO;
   isMobile = false;
@@ -83,6 +86,8 @@ export class LoginPageComponent {
         this.apiService.post(url, values).subscribe({
           next: (val: any) => {
             console.log(val);
+            this.util.openSnackBar('LoggedIn successfully', 'DISMISS');
+            this.router.navigate(['/welcome']);
           }
         });
       } else {
