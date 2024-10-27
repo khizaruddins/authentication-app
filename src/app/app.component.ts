@@ -7,7 +7,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
   standalone: true,
   imports: [
     RouterOutlet,
-    MatFormFieldModule
+    MatFormFieldModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

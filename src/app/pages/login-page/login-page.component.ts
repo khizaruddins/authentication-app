@@ -8,6 +8,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { VarsService } from '../../shared/services/vars.service';
+import { ApiService } from '../../shared/services/api.service';
+import { API_URLS } from '../../shared/constants/api-urls';
 
 
 @Component({
@@ -37,7 +39,7 @@ export class LoginPageComponent {
         Validators.required, 
         Validators.minLength(8), 
         Validators.maxLength(20), 
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]$/)
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{1,}$/)
       ]
     }),
     remember: new FormControl(false, {
@@ -46,6 +48,7 @@ export class LoginPageComponent {
   });
 
   varsService = inject(VarsService);
+  apiService = inject(ApiService);
 
   loginFormInfo = LOGIN_FORM_INFO;
   isMobile = false;
@@ -76,6 +79,12 @@ export class LoginPageComponent {
       if (this.loginForm.get('remember')?.value) {
         delete values.remember;
         localStorage.setItem('loggedInEmail', JSON.stringify(this.loginForm.value.email));
+        const url = API_URLS.POST_LOGIN();
+        this.apiService.post(url, values).subscribe({
+          next: (val: any) => {
+            console.log(val);
+          }
+        });
       } else {
         localStorage.clear();
       }
