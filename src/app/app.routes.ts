@@ -10,7 +10,7 @@ export const routes: Routes = [
         component: LayoutComponent,
         children: [
             {
-                path:  '',
+                path:  'login',
                 component: LoginPageComponent
             },
             {
@@ -18,8 +18,9 @@ export const routes: Routes = [
                 component: RegisterPageComponent
             },
             {
-                path: 'welcome',
-                component: WelcomePageComponent
+                path: '',
+                component: WelcomePageComponent,
+                pathMatch: 'full'
             }
         ]
     },

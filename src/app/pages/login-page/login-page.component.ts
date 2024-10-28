@@ -82,17 +82,17 @@ export class LoginPageComponent {
       if (this.loginForm.get('remember')?.value) {
         delete values.remember;
         localStorage.setItem('loggedInEmail', JSON.stringify(this.loginForm.value.email));
-        const url = API_URLS.POST_LOGIN();
-        this.apiService.post(url, values).subscribe({
-          next: (val: any) => {
-            console.log(val);
-            this.util.openSnackBar('LoggedIn successfully', 'DISMISS');
-            this.router.navigate(['/welcome']);
-          }
-        });
       } else {
         localStorage.clear();
       }
+      const url = API_URLS.POST_LOGIN();
+      this.apiService.post(url, values).subscribe({
+        next: (val: any) => {
+          console.log(val);
+          this.util.openSnackBar('LoggedIn successfully', 'DISMISS');
+          this.router.navigate(['/welcome']);
+        }
+      });
     } else {
       this.loginForm.markAllAsTouched();
     }
