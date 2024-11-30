@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputComponent } from "../../core/input/input.component";
 import { LOGIN_FORM_INFO } from '../../shared/form-infos/login-form.info';
-import { Router, RouterLink } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { ButtonComponent } from "../../core/button/button.component";
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
@@ -48,6 +48,7 @@ export class LoginPageComponent {
       validators: [Validators.required]
     })
   });
+
   util = inject(UtilService);
 
   varsService = inject(VarsService);
@@ -66,12 +67,24 @@ export class LoginPageComponent {
   storageService = inject(StorageService);
 
   ngOnInit() {
+    this.configureRouter();
     this.patchEmail();
     this.isMobile = this.varsService.isMobile;
+  }
+
+  hideHeaderFooter() {
     this.varsService.mainLayoutConfig$.next({
       showFooter: false,
       showHeader: false
     });
+  }
+
+  configureRouter() {
+    this.router.events.subscribe((router) => {
+      if (router instanceof NavigationEnd) {
+        this.hideHeaderFooter();
+      }
+    })
   }
 
   patchEmail() {
