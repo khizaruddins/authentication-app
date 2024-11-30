@@ -7,17 +7,16 @@ import { MatInputModule } from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 
 @Component({
-  selector: 'app-input',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './input.component.html',
-  styleUrl: './input.component.scss'
+    selector: 'app-input',
+    imports: [
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './input.component.html',
+    styleUrl: './input.component.scss'
 })
 export class InputComponent {
   @Input({required: true}) config!: IInput;

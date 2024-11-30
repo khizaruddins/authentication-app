@@ -16,21 +16,20 @@ import { StorageService } from '../../shared/services/storage.service';
 
 
 @Component({
-  selector: 'app-login-page',
-  standalone: true,
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    InputComponent,
-    RouterLink,
-    ButtonComponent,
-    MatCheckboxModule,
-    MatIconModule,
-    MatTooltipModule
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './login-page.component.html',
-  styleUrl: './login-page.component.scss'
+    selector: 'app-login-page',
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        InputComponent,
+        RouterLink,
+        ButtonComponent,
+        MatCheckboxModule,
+        MatIconModule,
+        MatTooltipModule
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './login-page.component.html',
+    styleUrl: './login-page.component.scss'
 })
 export class LoginPageComponent {
   loginForm: FormGroup = new FormGroup({

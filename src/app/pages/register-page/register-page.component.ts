@@ -12,20 +12,19 @@ import { StorageService } from '../../shared/services/storage.service';
 import { CookieService } from '../../shared/services/cookie.service';
 
 @Component({
-  selector: 'app-register-page',
-  standalone: true,
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    InputComponent,
-    RouterLink,
-    ButtonComponent,
-    MatError,
-    MatCheckboxModule
-],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './register-page.component.html',
-  styleUrl: './register-page.component.scss'
+    selector: 'app-register-page',
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        InputComponent,
+        RouterLink,
+        ButtonComponent,
+        MatError,
+        MatCheckboxModule
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './register-page.component.html',
+    styleUrl: './register-page.component.scss'
 })
 export class RegisterPageComponent {
 

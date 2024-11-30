@@ -6,16 +6,15 @@ import { VarsService } from '../../shared/services/vars.service';
 import { IMainLayout } from '../../shared/models/layout.interface';
 
 @Component({
-  selector: 'app-layout',
-  standalone: true,
-  imports: [
-    RouterOutlet,
-    HeaderComponent,
-    FooterComponent
-],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './layout.component.html',
-  styleUrl: './layout.component.scss'
+    selector: 'app-layout',
+    imports: [
+        RouterOutlet,
+        HeaderComponent,
+        FooterComponent
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './layout.component.html',
+    styleUrl: './layout.component.scss'
 })
 export class LayoutComponent {
   vars = inject(VarsService);
