@@ -18,7 +18,7 @@ import { IMainLayout } from '../../shared/models/layout.interface';
 })
 export class LayoutComponent {
   vars = inject(VarsService);
-  layoutConfig: IMainLayout = {showHeader: true, showFooter: true};
+  layoutConfig: IMainLayout | null = null;
 
   ngOnInit() {
     this.vars.mainLayoutConfig$.subscribe({next: val =>  {
