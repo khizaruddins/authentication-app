@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { InputComponent } from "../../core/input/input.component";
 import { RouterLink } from '@angular/router';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -7,6 +7,9 @@ import { ButtonComponent } from "../../core/button/button.component";
 import { IButton } from '../../shared/models/button.interface';
 import { MatError } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { VarsService } from '../../shared/services/vars.service';
+import { StorageService } from '../../shared/services/storage.service';
+import { CookieService } from '../../shared/services/cookie.service';
 
 @Component({
   selector: 'app-register-page',
@@ -31,6 +34,16 @@ export class RegisterPageComponent {
     label: 'Register',
     type: 'submit',
     isLoading: false
+  }
+  varsService = inject(VarsService);
+  storageService = inject(StorageService);
+  cookieService = inject(CookieService);
+
+  ngOnInit() {
+    this.varsService.mainLayoutConfig$.next({
+      showFooter: false,
+      showHeader: false
+    });
   }
 
   signupForm = new FormGroup({
@@ -86,6 +99,14 @@ export class RegisterPageComponent {
       delete value.terms;
       value['password'] = this.signupForm.get('passwords.password')?.value;
       console.log(value);
+      const userData = {
+        id: Math.random(),
+        name: this.getFormControl('firstName').value + ' ' + this.getFormControl('lastName').value,
+        email: this.getFormControl('email').value,
+        number: '',
+      }
+      this.storageService.local.add('userData', userData);
+      this.varsService.userData$.next(userData);
     } else  {
       this.signupForm.markAllAsTouched();
     }

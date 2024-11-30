@@ -11,6 +11,8 @@ import { VarsService } from '../../shared/services/vars.service';
 import { ApiService } from '../../shared/services/api.service';
 import { API_URLS } from '../../shared/constants/api-urls';
 import { UtilService } from '../../shared/services/util.service';
+import { CookieService } from '../../shared/services/cookie.service';
+import { StorageService } from '../../shared/services/storage.service';
 
 
 @Component({
@@ -61,9 +63,16 @@ export class LoginPageComponent {
     isLoading: false
   }
 
+  cookieService = inject(CookieService);
+  storageService = inject(StorageService);
+
   ngOnInit() {
     this.patchEmail();
     this.isMobile = this.varsService.isMobile;
+    this.varsService.mainLayoutConfig$.next({
+      showFooter: false,
+      showHeader: false
+    });
   }
 
   patchEmail() {
@@ -81,16 +90,23 @@ export class LoginPageComponent {
     if (this.loginForm.valid) {
       if (this.loginForm.get('remember')?.value) {
         delete values.remember;
-        localStorage.setItem('loggedInEmail', JSON.stringify(this.loginForm.value.email));
+        this.storageService.local.add('loggedInEmail', this.loginForm.value.email)
       } else {
-        localStorage.clear();
+        this.storageService.local.clear();
       }
       const url = API_URLS.POST_LOGIN();
       this.apiService.post(url, values).subscribe({
         next: (val: any) => {
-          console.log(val);
           this.util.openSnackBar('LoggedIn successfully', 'DISMISS');
           this.router.navigate(['/welcome']);
+          const userData = {
+            id: Math.random(),
+            name: 'abc',
+            email: this.loginForm.value.email,
+            number: '',
+          }
+          this.storageService.local.add('userData', userData);
+          this.varsService.userData$.next(userData);
         }
       });
     } else {
