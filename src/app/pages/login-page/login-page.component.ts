@@ -49,6 +49,10 @@ export class LoginPageComponent {
     })
   });
 
+  constructor() {
+    this.configureRouter();
+  }
+
   util = inject(UtilService);
 
   varsService = inject(VarsService);
@@ -68,8 +72,8 @@ export class LoginPageComponent {
 
   ngOnInit() {
     this.configureRouter();
-    this.patchEmail();
     this.isMobile = this.varsService.isMobile;
+    this.patchEmail();
   }
 
   hideHeaderFooter() {
@@ -118,9 +122,18 @@ export class LoginPageComponent {
             number: '',
           }
           this.storageService.local.add('userData', userData);
-          this.varsService.userData$.next(userData);
+          this.varsService.userSubject$.next(userData);
         }
-      });
+      , error: (error)=> {
+        const userData = {
+          id: Math.random(),
+          name: 'abc',
+          email: this.loginForm.value.email,
+        }
+        this.storageService.local.add('userData', userData);
+        this.varsService.userSubject$.next(userData);
+        this.router.navigate(['/']);
+      }});
     } else {
       this.loginForm.markAllAsTouched();
     }

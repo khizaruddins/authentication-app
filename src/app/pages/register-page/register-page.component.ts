@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { InputComponent } from "../../core/input/input.component";
-import { RouterLink } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterModule } from '@angular/router';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SIGNUP_FORM_INFO } from '../../shared/form-infos/signup-form.info';
 import { ButtonComponent } from "../../core/button/button.component";
@@ -20,7 +20,8 @@ import { CookieService } from '../../shared/services/cookie.service';
         RouterLink,
         ButtonComponent,
         MatError,
-        MatCheckboxModule
+        MatCheckboxModule,
+        RouterModule
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './register-page.component.html',
@@ -38,7 +39,22 @@ export class RegisterPageComponent {
   storageService = inject(StorageService);
   cookieService = inject(CookieService);
 
-  ngOnInit() {
+  router = inject(Router);
+
+  constructor () {
+    this.configureRouter();
+  }
+
+
+  configureRouter() {
+    this.router.events.subscribe((router) => {
+      if (router instanceof NavigationEnd) {
+        this.hideHeaderFooter();
+      }
+    })
+  }
+
+  hideHeaderFooter() {
     this.varsService.mainLayoutConfig$.next({
       showFooter: false,
       showHeader: false
@@ -102,10 +118,9 @@ export class RegisterPageComponent {
         id: Math.random(),
         name: this.getFormControl('firstName').value + ' ' + this.getFormControl('lastName').value,
         email: this.getFormControl('email').value,
-        number: '',
       }
       this.storageService.local.add('userData', userData);
-      this.varsService.userData$.next(userData);
+      this.varsService.userSubject$.next(userData);
     } else  {
       this.signupForm.markAllAsTouched();
     }
